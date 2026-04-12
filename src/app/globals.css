@@ -1,26 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-pixel: 'Press Start 2P', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #030712;
+  color: #e5e7eb;
+  font-family: var(--font-pixel), monospace;
+  overflow-x: hidden;
+}
+
+/* Subtle scanline overlay */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Custom scrollbar for HCS feed */
+.hcs-scroll::-webkit-scrollbar { width: 4px; }
+.hcs-scroll::-webkit-scrollbar-track { background: #111827; }
+.hcs-scroll::-webkit-scrollbar-thumb { background: #374151; border-radius: 2px; }
+
+/* Speech bubble triangle */
+.bubble-left::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 16px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #1f2937;
+}
+
+.bubble-right::before {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  right: 16px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #1f2937;
 }
